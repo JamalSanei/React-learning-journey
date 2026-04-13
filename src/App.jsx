@@ -1,5 +1,8 @@
 import { useRef, useState } from "react";
+import Input from "./components/input";
+import Button from "./components/button";
 
+//********************* sample data *********************
 const DATA = [
   { id: 1, name: "j" },
   { id: 2, name: "m" },
@@ -20,7 +23,8 @@ const App = () => {
     inputRef.current.focus();
   };
 
-  const changeInputValue = ({ target }) => setInputVal(target.value);
+  const changeInputValue = (value) => setInputVal(value);
+  const changeInputSearch = (value) => setInputSearch(value);
 
   const handleKeyUp = (e) => {
     if (e.keyCode === ENTER_KEY_CODE) addItem();
@@ -29,39 +33,24 @@ const App = () => {
   return (
     <div className=" p-4 rounded-lg mt-10 ml-10 shadow-lg">
       <div>
-        <input
-          className="border rounded p-2 mr-2"
-          type="text"
-          placeholder="type to searching..."
+        <Input
           value={inputSearch}
-          onChange={({ target }) => setInputSearch(target.value)}
+          onChange={changeInputSearch}
+          placeholder="type to searching..."
         />
-        <button
-          className="
-          bg-slate-500 rounded border p-2
-          border-blue-500  text-white"
-          onClick={() => setCanAdd(!canAdd)}
-        >
-          +Add Item
-        </button>
+        <Button onClick={() => setCanAdd(!canAdd)}>+Add Item</Button>
       </div>
       {canAdd ? (
         <div className="bg-slate-100 mb-4 flex p-4 justify-between">
-          <input
-            type="text"
+          <Input
             value={inputVal}
             onChange={changeInputValue}
             onKeyUp={handleKeyUp}
             ref={inputRef}
-            className="border rounded mr-2 px-2"
           />
-          <button
-            className="bg-white p-2 rounded cursor-pointer hover:bg-slate-200"
-            onClick={addItem}
-            disabled={!inputVal}
-          >
+          <Button onClick={addItem} disabled={!inputVal}>
             Add
-          </button>
+          </Button>
         </div>
       ) : null}
       <ul>
