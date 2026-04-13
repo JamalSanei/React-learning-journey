@@ -1,6 +1,9 @@
 import { useRef, useState } from "react";
-import Input from "./components/input";
-import Button from "./components/button";
+import Input from "./components/Input";
+import Button from "./components/Button";
+import { ENTER_KEY_CODE } from "./constants/KEY_MAP";
+import AddItem from "./components/AddItem";
+import List from "./components/List";
 
 //********************* sample data *********************
 const DATA = [
@@ -15,7 +18,6 @@ const App = () => {
   const [inputSearch, setInputSearch] = useState("");
   const [canAdd, setCanAdd] = useState(false);
   const inputRef = useRef(null);
-  const ENTER_KEY_CODE = 13;
 
   const addItem = () => {
     setUsers([...users, { id: users.length + 1, name: inputVal }]);
@@ -41,24 +43,16 @@ const App = () => {
         <Button onClick={() => setCanAdd(!canAdd)}>+Add Item</Button>
       </div>
       {canAdd ? (
-        <div className="bg-slate-100 mb-4 flex p-4 justify-between">
-          <Input
-            value={inputVal}
-            onChange={changeInputValue}
-            onKeyUp={handleKeyUp}
-            ref={inputRef}
-          />
-          <Button onClick={addItem} disabled={!inputVal}>
-            Add
-          </Button>
-        </div>
+        <AddItem
+          inputVal={inputVal}
+          changeInputValue={changeInputValue}
+          handleKeyUp={handleKeyUp}
+          inputRef={inputRef}
+          addItem={addItem}
+        />
       ) : null}
       <ul>
-        {users
-          .filter(({ name }) => name.includes(inputSearch))
-          .map(({ id, name }) => (
-            <li key={id}>{name}</li>
-          ))}
+        <List data={users} inputSearch={inputSearch} />
       </ul>
     </div>
   );
