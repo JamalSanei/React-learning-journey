@@ -30,11 +30,12 @@ const useList = () => {
         inputVal,
         inputSearch,
         canAdd,
-        inputRef, toggleCanAdd,
+        toggleCanAdd,
         changeInputSearch,
         changeInputValue,
         handleKeyUp,
-        addItem
+        addItem,
+        inputRef
     }
 }
 

@@ -1,4 +1,4 @@
-const Input = ({ value, onChange, onKeyUp, placeholder, inputRef }) => (
+const Input = ({ value, onChange, onKeyUp, placeholder, ref }) => (
   <div>
     <input
       className="border rounded p-2 mr-2"
@@ -7,7 +7,7 @@ const Input = ({ value, onChange, onKeyUp, placeholder, inputRef }) => (
       value={value}
       onChange={(e) => onChange(e.target.value)}
       onKeyUp={onKeyUp}
-      ref={inputRef}
+      ref={ref}
     />
   </div>
 );
